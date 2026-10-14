@@ -1,6 +1,7 @@
-## Root scene of the game. Wires UI input to the player and draws a
-## placeholder grid so movement is visible. Contains no combat logic.
-## Talks to: TouchJoystick (signal) -> Player.set_touch_direction().
+## Root scene of the game. Wires UI input and enemy spawning to the player and
+## draws a placeholder grid so movement is visible. Contains no combat logic.
+## Talks to: TouchJoystick (signal) -> Player.set_touch_direction();
+## gives the Player to EnemySpawner as its chase target.
 extends Node2D
 
 ## Distance in pixels between grid lines.
@@ -10,10 +11,12 @@ const GRID_HALF_SIZE: int = 3000
 
 @onready var _player: Player = $Player
 @onready var _joystick: TouchJoystick = $UI/TouchJoystick
+@onready var _spawner: EnemySpawner = $EnemySpawner
 
 
 func _ready() -> void:
 	_joystick.direction_changed.connect(_player.set_touch_direction)
+	_spawner.target = _player
 
 
 func _draw() -> void:
