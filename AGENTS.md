@@ -116,7 +116,7 @@ Un survivor puede llegar a cientos de enemigos en pantalla. Ten en cuenta lo sig
 
 El proyecto también sirve para practicar DevOps y la toma de decisiones. Trátalo como un producto real.
 
-- **Git:** la rama `main` siempre debe abrir y ejecutarse sin errores. Trabaja en ramas `feat/...`, `fix/...` o `chore/...`.
+- **Git:** la rama `main` siempre debe abrir y ejecutarse sin errores. El autor es la única persona del proyecto, así que se trabaja **directamente en `main`** (sin ramas ni PRs); haz commits pequeños y valida antes de cada push. Si algún día entra más gente, se vuelve a ramas `feat/...`, `fix/...` o `chore/...` y se registra en un ADR.
 - **Commits:** [Conventional Commits](https://www.conventionalcommits.org/) (`feat: add door selection after room clear`).
 - **Versionado:** SemVer con tags (`v0.1.0`). El `version/code` de Android debe incrementarse en cada release.
 - **Decisiones:** cualquier decisión relevante de diseño o arquitectura se documenta como ADR en `docs/adr/NNNN-titulo.md` (contexto, decisión, alternativas descartadas, consecuencias).
