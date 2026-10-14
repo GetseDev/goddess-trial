@@ -1,6 +1,9 @@
+## Heroine controller. Reads movement input and moves the body.
+## Talks to: nothing yet (the virtual joystick will feed the same input actions).
 class_name Player
 extends CharacterBody2D
 
+## Movement speed in pixels per second.
 @export var speed: float = 300.0
 
 

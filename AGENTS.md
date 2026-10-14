@@ -79,6 +79,10 @@ res://
 
 Cada script vive junto a su escena (`scenes/player/player.tscn` + `scenes/player/player.gd`), salvo los autoloads y los componentes compartidos, que van en `scripts/`.
 
+**Mapa de módulos:** consulta [`docs/design/arquitectura.md`](docs/design/arquitectura.md) antes de buscar código; describe qué hace cada carpeta, autoload y componente. Actualízalo al añadir o mover módulos.
+
+**Documentación del código:** cada script empieza con un comentario de clase `##` (qué hace y con quién habla), y las señales, `@export` y funciones públicas llevan `##`. Comenta el porqué, no lo obvio. Los comentarios van en inglés.
+
 ## Convenciones de código
 
 Sigue la [guía de estilo oficial de GDScript](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html):
