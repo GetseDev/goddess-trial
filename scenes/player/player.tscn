@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cwe7owmorcybi"]
+
+[ext_resource type="Script" uid="uid://g8ilkdgdvs2c" path="res://scenes/player/player.gd" id="1_8afob"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
+size = Vector2(40, 40)
+
+[node name="Player" type="CharacterBody2D" unique_id=1506718833]
+script = ExtResource("1_8afob")
+
+[node name="Body" type="Polygon2D" parent="." unique_id=208217861]
+color = Color(1, 0.44, 0.65, 1)
+polygon = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=716754983]
+shape = SubResource("RectangleShape2D_dovo2")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1971551324]

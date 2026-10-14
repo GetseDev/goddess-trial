@@ -1,0 +1,11 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# macOS
+.DS_Store
+
+# Android signing & export secrets (never commit)
+*.keystore
+*.jks
+export_credentials.cfg
