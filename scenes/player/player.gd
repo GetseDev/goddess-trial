@@ -1,13 +1,23 @@
 ## Heroine controller. Reads movement input and moves the body.
-## Talks to: nothing yet (the virtual joystick will feed the same input actions).
+## Talks to: receives the virtual joystick direction via set_touch_direction().
+## Keyboard (arrow keys) is kept as a fallback for desktop testing.
 class_name Player
 extends CharacterBody2D
 
 ## Movement speed in pixels per second.
 @export var speed: float = 300.0
 
+var _touch_direction: Vector2 = Vector2.ZERO
+
 
 func _physics_process(_delta: float) -> void:
 	var direction: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	if direction == Vector2.ZERO:
+		direction = _touch_direction
 	velocity = direction * speed
 	move_and_slide()
+
+
+## Sets the joystick direction (length 0..1). Zero vector stops the heroine.
+func set_touch_direction(direction: Vector2) -> void:
+	_touch_direction = direction
