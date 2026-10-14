@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy_spawner.gd" id="1_spawner"]
+[ext_resource type="Script" path="res://scripts/components/object_pool.gd" id="2_pool"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="3_enemy"]
+[ext_resource type="Resource" path="res://resources/enemies/grunt.tres" id="4_grunt"]
+
+[node name="EnemySpawner" type="Node"]
+script = ExtResource("1_spawner")
+enemy_data = ExtResource("4_grunt")
+
+[node name="EnemyPool" type="Node2D" parent="."]
+script = ExtResource("2_pool")
+scene = ExtResource("3_enemy")
+prewarm = 50
+
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
