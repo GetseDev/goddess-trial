@@ -1,5 +1,6 @@
 ## Spawns pooled enemies in a ring around the target at a fixed interval.
-## Talks to: Main sets `target`; call despawn() when an enemy dies or leaves.
+## Returns enemies to the pool when they are defeated.
+## Talks to: Main sets `target`; listens to Enemy.defeated.
 class_name EnemySpawner
 extends Node
 
@@ -37,6 +38,8 @@ func _spawn() -> void:
 	if target == null or _active_count >= max_enemies:
 		return
 	var enemy: Enemy = _pool.acquire() as Enemy
+	if not enemy.defeated.is_connected(despawn):
+		enemy.defeated.connect(despawn)
 	enemy.setup(enemy_data, target)
 	enemy.global_position = target.global_position + Vector2.from_angle(randf() * TAU) * spawn_radius
 	_active_count += 1

@@ -17,14 +17,15 @@ Estado: ✅ existe · 🕓 planeado (la carpeta se crea cuando haga falta; no se
 
 | Carpeta | Estado | Qué contiene | Reglas |
 |---|---|---|---|
-| `scenes/player/` | ✅ | Heroína: `player.tscn` + `player.gd` (movimiento) | Un script por escena, mismo nombre |
+| `scenes/player/` | ✅ | Heroína: `player.tscn` + `player.gd` (movimiento, re-emite señales de vida). Lleva `Health`, `Hurtbox` y `AutoAttack` como hijos | Un script por escena, mismo nombre |
+| `scenes/projectiles/` | ✅ | `projectile` (Area2D con pool, daña al primer objetivo con `take_damage()`) | Siempre se obtiene de un `ObjectPool` |
 | `scenes/main/` | ✅ | `main.tscn` + `main.gd`: escena principal (jugador, UI, cuadrícula placeholder). Los menús vendrán aquí | Solo orquesta, sin lógica de combate |
-| `scenes/enemies/` | ✅ | `enemy` (persigue al objetivo, placeholder rombo) y `enemy_spawner` (genera en anillo fuera de pantalla con pool). Pendiente: vida y daño por contacto | Leen sus stats de un `EnemyData` |
+| `scenes/enemies/` | ✅ | `enemy` (persigue al objetivo, placeholder rombo) y `enemy_spawner` (genera en anillo fuera de pantalla con pool). Tienen vida (`HealthComponent`) y mueren al recibir daño | Leen sus stats de un `EnemyData` |
 | `scenes/rooms/` | 🕓 | Salas de 60–90 s y puertas de recompensa | La sala emite `room_cleared` al terminar |
 | `scenes/sanctuary/` | 🕓 | Hub de meta-progresión entre partidas | Lee y escribe mejoras vía `SaveManager` |
-| `scenes/ui/` | ✅ | `touch_joystick`: joystick flotante táctil (emite `direction_changed`). Pendiente: HUD, pantalla de bendiciones | Solo presentación; reciben datos por señales. `VirtualJoystick` está reservado por Godot 4.7, por eso la clase es `TouchJoystick` |
+| `scenes/ui/` | ✅ | `touch_joystick`: joystick flotante táctil (emite `direction_changed`). `hud`: vida de la heroína. Pendiente: barra de fe, pantalla de bendiciones | Solo presentación; reciben datos por señales. `VirtualJoystick` está reservado por Godot 4.7, por eso la clase es `TouchJoystick` |
 | `scripts/autoload/` | 🕓 | Singletons globales | Ver tabla de autoloads |
-| `scripts/components/` | ✅ | `object_pool.gd` (`ObjectPool`, pool genérico de `Node2D` con hooks `on_acquired`/`on_released`). Pendiente: `HealthComponent`, `Hitbox` | Sin dependencias de escenas concretas |
+| `scripts/components/` | ✅ | `ObjectPool` (pool genérico con hooks `on_acquired`/`on_released`), `HealthComponent` (vida, señales `health_changed`/`died`), `Hurtbox` (daño por contacto vía `get_contact_damage()`), `AutoAttackComponent` (dispara al enemigo más cercano del grupo `enemies`) | Sin dependencias de escenas concretas |
 | `resources/goddesses/` | 🕓 | `GoddessData` (`.tres`) | Datos puros |
 | `resources/blessings/` | 🕓 | `BlessingData` (`.tres`) y definición de combos | Datos puros |
 | `resources/enemies/` | ✅ | `enemy_data.gd` (`EnemyData`) y `grunt.tres` | Datos puros |
@@ -67,7 +68,7 @@ Room ──room_cleared──▶ RunManager ──▶ Puertas ──elige──�
 Muerte ──run_ended──▶ SaveManager ──▶ Santuario (mejoras permanentes)
 ```
 
-## Capas de colisión (propuesta) 🕓
+## Capas de colisión ✅ (1–4 nombradas en Project Settings)
 
 | Capa | Nombre | Uso |
 |---|---|---|
